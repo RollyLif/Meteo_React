@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [data, setData] = useState("Goma");
+
+  useEffect(() => {
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q="+data+"&appid=eac0fb388a3b92e0d649df28f5b0adb9&units=metric")
+    .then(result => result.json())
+    .then(result => console.log(result))
+  }); 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label for="fname">Ville:</label>
+      <input type="text" id="fname" name="fname" value={data} onChange={(e) => {setData(e.target.value)}}/><br/>
     </div>
   );
 }
